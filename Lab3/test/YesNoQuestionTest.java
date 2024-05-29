@@ -1,28 +1,13 @@
-
 import org.junit.Test;
 
-import java.util.Random;
 
 import static org.junit.Assert.*;
 
-public class YesNoQuestionTest {
-  private String longRandom;
+public class YesNoQuestionTest extends AllQuestionTest {
   public YesNoQuestionTest() {
-    longRandom = "aosdifjaso oifhas;ldihv;al skdfha;osidghv;osiadhvbasdjkhvn";
-  }
-
-  @Test
-  public void testCreateValidYesNoQuestion() {
-    Random r = new Random(200);
-    for (int i=0;i<1000;i++) {
-      int start = r.nextInt(longRandom.length()-1);
-      int end = start + r.nextInt(longRandom.length()-start-1) + 1;
-      String questionText = longRandom.substring(start,end);
-      Question q = new YesNoQuestion(questionText+"?");
-      assertEquals(questionText+"?",q.getQuestionText());
-      assertEquals("YesNo",q.getType());
-    }
-
+    super();
+    this.possibleAnswers = new String[]
+            {"yes","Yes","YEs","YeS","YES","yEs","yES","yeS","no","No","nO","NO"};
   }
 
   @Test(expected=IllegalArgumentException.class)
@@ -35,11 +20,13 @@ public class YesNoQuestionTest {
     new YesNoQuestion("Is this fun");
   }
 
-  @Test
+
+  @Test @Override
   public void testAnswerCorrectly() {
-    String []answers = {"yes","Yes","YEs","YeS","YES","yEs","yES","yeS","no","No","nO","NO"};
-    for (String answer:answers) {
+
+    for (String answer : this.possibleAnswers) {
       Question q = new YesNoQuestion("Is this a trick question?");
+
       assertFalse(q.hasBeenAnswered());
 
       q.answer(answer);
@@ -57,7 +44,7 @@ public class YesNoQuestionTest {
 
       try {
         q.answer(answer);
-        fail("Yes No question accepted an invalid answer");
+        fail("Invalid answer");
       }
       catch (IllegalArgumentException e) {
         assertFalse(q.hasBeenAnswered());
