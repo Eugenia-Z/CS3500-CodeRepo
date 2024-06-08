@@ -1,5 +1,6 @@
 package betterpizza;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import pizza.Crust;
@@ -40,11 +41,10 @@ public class AlaCartePizza implements ObservablePizza {
     this(builder.size, builder.crust, builder.toppings);
   }
 
-  /*
+
   public static AlaCartePizzaBuilder getBuilder() {
     return new AlaCartePizzaBuilder();
   }
-*/
 
   @Override
   public ToppingPortion hasTopping(ToppingName name) {
@@ -61,16 +61,16 @@ public class AlaCartePizza implements ObservablePizza {
   }
 
   public static class AlaCartePizzaBuilder extends PizzaBuilder<AlaCartePizzaBuilder> {
-    /*  protected Crust crust;
-      protected Size size;
-      protected Map<ToppingName,ToppingPortion> toppings;
+    protected Crust crust;
+    protected Size size;
+    protected Map<ToppingName,ToppingPortion> toppings;
 
-      protected AlaCartePizzaBuilder() {
-        crust = null;
-        size = null;
-        toppings = new HashMap<ToppingName,ToppingPortion>();
-      }
-  */
+    public AlaCartePizzaBuilder() {
+      crust = null;
+      size = null;
+      toppings = new HashMap<ToppingName,ToppingPortion>();
+    }
+
     @Override
     public AlaCartePizzaBuilder returnBuilder() {
       return this;
